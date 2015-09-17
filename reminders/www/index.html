@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<!-- CSP support mode (required for Windows Universal apps): https://docs.angularjs.org/api/ng/directive/ngCsp -->
+<html lang="en" ng-app="app" ng-csp>
+<head>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- JS dependencies (order matters!) -->
+    <script src="scripts/platformOverrides.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+
+    <!-- CSS dependencies -->
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-blue-basic-theme.css" />
+
+    <!-- CSP support mode (required for Windows Universal apps) -->
+    <link rel="stylesheet" href="lib/angular/angular-csp.css" />
+
+
+    <!-- --------------- App init --------------- -->
+
+    <title>Onsen UI Sliding Menu</title>
+
+    <script>
+        angular.module('app', ['onsen']);
+    </script>
+
+    <style>
+        .page--menu-page__background {
+            background-color: #333;
+        }
+
+        .page--menu-page__content {
+            color: white;
+        }
+
+        .menu-close,
+        .menu-close > .toolbar-button {
+            color: #999;
+        }
+
+        .menu-list,
+        .menu-item:first-child,
+        .menu-item:last-child,
+        .menu-item {
+            background-color: transparent;
+            background-image: none !important;
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .menu-item {
+            padding: 0 0 0 20px;
+            line-height: 52px;
+            height: 52px;
+            text-shadow: rgba(0, 0, 0, 0.4) 0px 1px 0px;
+        }
+
+            .menu-item:active {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+        .menu-notification {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 14px;
+            height: 16px;
+            line-height: 16px;
+            min-width: 16px;
+            font-weight: 600;
+        }
+
+        .bottom-menu-list,
+        .bottom-menu-item:first-child,
+        .bottom-menu-item:last-child,
+        .bottom-menu-item {
+            border-color: #393939;
+            background-color: transparent;
+            background-image: none !important;
+            color: #ccc;
+        }
+
+            .bottom-menu-item:active {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+    </style>
+
+</head>
+
+<body>
+    <!-- Cordova reference -->
+    <script src="cordova.js"></script>
+    <script src="scripts/index.js"></script>
+    <script src="js/app.js"></script>
+    <!-- -->
+    
+    <ons-navigator var="home-nav">
+
+
+    <ons-sliding-menu menu-page="menu.html" main-page="home.html" side="left"
+                      var="menu" type="reveal" max-slide-distance="260px" swipeable="true">
+    </ons-sliding-menu>
+
+    <ons-template id="menu.html">
+        <ons-page modifier="menu-page">
+            <ons-toolbar modifier="transparent"></ons-toolbar>
+
+            <ons-list class="menu-list">
+                                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('home.html', {closeMenu: true})">
+                    Home
+                </ons-list-item>
+
+                
+
+                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('help.html', {closeMenu: true})">
+                    Help
+                </ons-list-item>
+
+               
+            </ons-list>
+        </ons-page>
+    </ons-template>
+        
+        
+                 
+        
+    <ons-template id="home.html">
+        <ons-page ng-controller="HomeController">
+
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button ng-click="menu.toggle()">
+                        <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">Home</div>
+                <div class="right">
+                    <ons-toolbar-button ng-click="home-nav.pushPage('new.html');">
+                        <ons-icon icon="ion-plus-round " size="28px" fixed-width="false"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+
+
+            <ons-row style="margin-top: 100px; text-align: center;">
+                <ons-col>
+                    <ons-button modifier="light" ng-click="menu.toggleMenu()">
+                        Toggle Menu
+                    </ons-button>
+                </ons-col>
+            </ons-row>
+
+        </ons-page>
+    </ons-template>
+    
+    <ons-template id="new.html">
+        <ons-page>
+        
+            <p>Hello!</p>
+            
+        </ons-page>
+    </ons-template>
+        
+    <ons-template id="category.html">
+                <ons-page ng-controller="CategoryController">
+
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button ng-click="menu.toggle()">
+                        <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">Choose A Category</div>
+            </ons-toolbar>
+
+
+            <ons-row style="margin-top: 100px; text-align: center;">
+                <ons-col>
+                     <ons-icon icon="ion-ios-briefcase" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>
+                        <ons-row style="margin-top: -25px; margin-left:70px; text-align: center;">
+                <ons-col>
+                     <ons-icon icon="ion-beer" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>
+
+     <ons-row style="margin-top: -25px; margin-left:-70px; text-align: center;">
+                <ons-col>
+                     <ons-icon icon="ion-ios-cart" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row> 
+            
+                 <ons-row style="margin-top: 30px; margin-left:-70px; text-align: center;">
+                <ons-col>
+                     <ons-icon icon="ion-ios-telephone" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>   
+            
+            <ons-row style="margin-top: -25px; text-align: center;">
+                <ons-col>
+                     <ons-icon icon="ion-ios-people" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row> 
+            
+            
+            <ons-row style="margin-top: -25px; margin-left:70px; text-align: center;">
+                <ons-col>
+                     <ons-icon icon="ion-plus-round" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row> 
+            
+                        <ons-row style="margin-top: 250px; margin-left:120px; text-align: center;">
+                <ons-col>
+                     <ons-icon icon="ion-ios-arrow-forward" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>
+            
+                       <ons-row style="margin-top: -25px; margin-left:-120px; text-align: center;">
+                <ons-col>
+                     <ons-icon icon="ion-ios-arrow-back" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row> 
+            
+            
+                            <ons-row style="margin-top: -28px; margin-left:90px; text-align: center;">
+                <ons-col>
+                     Next
+                </ons-col>
+            </ons-row>
+            
+                                        <ons-row style="margin-top: -20px; margin-left:-90px; text-align: center;">
+                <ons-col>
+                     Back
+                </ons-col>
+            </ons-row> 
+            
+            
+            
+        </ons-page>
+    </ons-template>
+        
+        
+        <ons-template id="time.html">
+        <ons-page ng-controller="TimeController">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button ng-click="menu.toggle()">
+                        <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">Pick A Time</div>
+            </ons-toolbar>
+
+
+            <ons-row style="margin-top: 100px; text-align: center;">
+                <ons-col>
+                   <button class="button button-light">
+                   This Morning                   
+                    </button>
+ 
+                </ons-col>
+            </ons-row>
+                        <ons-row style="margin-top: 10px; text-align: center;">
+                <ons-col>
+                   <button class="button button-light">
+                   This Evening                   
+                    </button>
+ 
+                </ons-col>
+            </ons-row>
+            
+             <ons-row style="margin-top: 10px; text-align: center;">
+                <ons-col>
+                   <button class="button button-light">
+                   Tomorrow                  
+                    </button>
+ 
+                </ons-col>
+            </ons-row>
+            
+                  <ons-row style="margin-top: 10px; text-align: center;">
+                <ons-col>
+                   <button class="button button-light">
+                   This Week                 
+                    </button>
+ 
+                </ons-col>
+            </ons-row>
+            
+                              <ons-row style="margin-top: 10px; text-align: center;">
+                <ons-col>
+                   <button class="button button-light">
+                   Next week                 
+                    </button>
+ 
+                </ons-col>
+            </ons-row>
+
+            <ons-row style="margin-top: 110px; margin-left:120px; text-align: center;">
+                <ons-col>
+                     <ons-icon icon="ion-ios-arrow-forward" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>
+            
+ <ons-row style="margin-top: -25px; margin-left:-120px; text-align: center;">
+                <ons-col>
+ <ons-icon icon="ion-ios-arrow-back" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row> 
+            
+            
+ <ons-row style="margin-top: -28px; margin-left:90px; text-align: center;">
+                <ons-col>
+                     Next
+                </ons-col>
+            </ons-row>
+            
+<ons-row style="margin-top: -20px; margin-left:-90px; text-align: center;">
+                <ons-col>
+                     Back
+                </ons-col>
+            </ons-row> 
+                   
+            
+            
+        </ons-page>
+    </ons-template>
+        
+        
+          <ons-template id="settings.html">
+        <ons-page ng-controller="SettingsController">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button ng-click="menu.toggle()">
+                        <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">Settings</div>
+            </ons-toolbar>
+
+
+            <ons-row style="margin-top: 100px; text-align: center;">
+                <ons-col>
+                    <ons-button modifier="light" ng-click="menu.toggleMenu()">
+                        Toggle Menu
+                    </ons-button>
+                </ons-col>
+            </ons-row>
+
+        </ons-page>
+    </ons-template>
+        
+        
+        
+          <ons-template id="help.html">
+        <ons-page ng-controller="HelpController">
+
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button ng-click="menu.toggle()">
+                        <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">Help</div>
+            </ons-toolbar>
+
+
+            <ons-row style="margin-top: 100px; text-align: center;">
+                <ons-col>
+                    <ons-button modifier="light" ng-click="menu.toggleMenu()">
+                        Toggle Menu
+                    </ons-button>
+                </ons-col>
+            </ons-row>
+
+        </ons-page>
+    </ons-template>
+        
+</body>
+</html>
