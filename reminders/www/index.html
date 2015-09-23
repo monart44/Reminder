@@ -255,9 +255,9 @@
           </ons-toolbar>
 <P style="text-align:center;margin-left:auto;margin-right:auto;">Choose A Time</P>
 
-            <ons-row style="margin-top: 100px; text-align: center;">
+           <!-- <ons-row style="margin-top: 100px; text-align: center;">
                 <ons-col>
-                  <style>
+     <style>
   .full button span {
     background-color: limegreen;
     border-radius: 32px;
@@ -308,13 +308,12 @@
     <button type="button" class="btn btn-sm btn-default" ng-click="dt = '2009-08-24'">2009-08-24</button>
     <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
     <button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" tooltip="After today restriction">Min date</button>
-</div>
- 
+</div> 
 
                 </ons-col>
             </ons-row>
             </ons-page>
-            </ons-template>
+            </ons-template>-->
             
             
             
@@ -353,16 +352,22 @@
             </div>
             <div class="center">Alarm</div>
             <div class="right">
-                <!--  MONA ! you can change where the button lives on the page, and which page it goes to here -->
+                
                 <ons-toolbar-button ng-click="homeNavigator.pushPage('home.html', { animation : 'slide' } )"> Next </ons-toolbar-button>
             </div>
           </ons-toolbar>
-
-
-            <ons-row style="margin-top: 100px; text-align: center;">
-
+         <ons-row style="margin-top: 100px; text-align: center;">
+                <ons-col>
+                     <ons-icon icon="ion-android-notifications" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+             
+             <p style="position:absolute; top:200px; right:100px;" >Yes</p>
+            </ons-row>
+ <p style="position:absolute; top:200px; left:100px;">No</p>
             </ons-row>
 
+
+          
         </ons-page>
     </ons-template>
 
