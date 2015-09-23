@@ -95,13 +95,12 @@
     <script src="scripts/index.js"></script>
     <script src="js/app.js"></script>
     <!-- -->
-    
-    <ons-navigator var="home-nav">
 
 
     <ons-sliding-menu menu-page="menu.html" main-page="home.html" side="left"
                       var="menu" type="reveal" max-slide-distance="260px" swipeable="true">
     </ons-sliding-menu>
+
 
     <ons-template id="menu.html">
         <ons-page modifier="menu-page">
@@ -112,21 +111,21 @@
                     Home
                 </ons-list-item>
 
-                
+
 
                 <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('help.html', {closeMenu: true})">
                     Help
                 </ons-list-item>
 
-               
+
             </ons-list>
         </ons-page>
     </ons-template>
-        
-        
-                 
-        
+
+
     <ons-template id="home.html">
+      <!--  MONA ! This is the most important part - the navigator. It allows you to push new pages, and pop them too! -->
+      <ons-navigator title="Navigator" var="homeNavigator">
         <ons-page ng-controller="HomeController">
 
             <ons-toolbar>
@@ -137,32 +136,39 @@
                 </div>
                 <div class="center">Home</div>
                 <div class="right">
-                    <ons-toolbar-button ng-click="home-nav.pushPage('new.html');">
+                  <!--  MONA ! the navigator is working. Feel free to tweak. -->
+                    <ons-toolbar-button ng-click="homeNavigator.pushPage('new.html', { animation : 'slide' } )">
                         <ons-icon icon="ion-plus-round " size="28px" fixed-width="false"></ons-icon>
                     </ons-toolbar-button>
                 </div>
             </ons-toolbar>
 
 
-            <ons-row style="margin-top: 100px; text-align: center;">
-                <ons-col>
-                    <ons-button modifier="light" ng-click="menu.toggleMenu()">
-                        Toggle Menu
-                    </ons-button>
-                </ons-col>
-            </ons-row>
+        </ons-page>
+      </ons-navigator>
+    </ons-template>
+
+
+    <ons-template id="new.html">
+        <ons-page>
+
+          <ons-toolbar>
+            <div class="left">
+              <ons-back-button>Back</ons-back-button>
+            </div>
+            <div class="center">New Reminder</div>
+            <div class="right">
+                <!--  MONA ! you can change where the button lives on the page, and which page it goes to here -->
+                <ons-toolbar-button ng-click="homeNavigator.pushPage('settings.html', { animation : 'slide' } )"> Next </ons-toolbar-button>
+            </div>
+          </ons-toolbar>
+
+            <p>Hello!</p>
 
         </ons-page>
     </ons-template>
-    
-    <ons-template id="new.html">
-        <ons-page>
-        
-            <p>Hello!</p>
-            
-        </ons-page>
-    </ons-template>
-        
+
+
     <ons-template id="category.html">
                 <ons-page ng-controller="CategoryController">
 
@@ -191,59 +197,59 @@
                 <ons-col>
                      <ons-icon icon="ion-ios-cart" size="28px" fixed-width="false"></ons-icon>
                 </ons-col>
-            </ons-row> 
-            
+            </ons-row>
+
                  <ons-row style="margin-top: 30px; margin-left:-70px; text-align: center;">
                 <ons-col>
                      <ons-icon icon="ion-ios-telephone" size="28px" fixed-width="false"></ons-icon>
                 </ons-col>
-            </ons-row>   
-            
+            </ons-row>
+
             <ons-row style="margin-top: -25px; text-align: center;">
                 <ons-col>
                      <ons-icon icon="ion-ios-people" size="28px" fixed-width="false"></ons-icon>
                 </ons-col>
-            </ons-row> 
-            
-            
+            </ons-row>
+
+
             <ons-row style="margin-top: -25px; margin-left:70px; text-align: center;">
                 <ons-col>
                      <ons-icon icon="ion-plus-round" size="28px" fixed-width="false"></ons-icon>
                 </ons-col>
-            </ons-row> 
-            
+            </ons-row>
+
                         <ons-row style="margin-top: 250px; margin-left:120px; text-align: center;">
                 <ons-col>
                      <ons-icon icon="ion-ios-arrow-forward" size="28px" fixed-width="false"></ons-icon>
                 </ons-col>
             </ons-row>
-            
+
                        <ons-row style="margin-top: -25px; margin-left:-120px; text-align: center;">
                 <ons-col>
                      <ons-icon icon="ion-ios-arrow-back" size="28px" fixed-width="false"></ons-icon>
                 </ons-col>
-            </ons-row> 
-            
-            
+            </ons-row>
+
+
                             <ons-row style="margin-top: -28px; margin-left:90px; text-align: center;">
                 <ons-col>
                      Next
                 </ons-col>
             </ons-row>
-            
-                                        <ons-row style="margin-top: -20px; margin-left:-90px; text-align: center;">
+
+          <ons-row style="margin-top: -20px; margin-left:-90px; text-align: center;">
                 <ons-col>
                      Back
                 </ons-col>
-            </ons-row> 
-            
-            
-            
+            </ons-row>
+
+
+
         </ons-page>
     </ons-template>
-        
-        
-        <ons-template id="time.html">
+
+
+    <ons-template id="time.html">
         <ons-page ng-controller="TimeController">
             <ons-toolbar>
                 <div class="left">
@@ -258,79 +264,69 @@
             <ons-row style="margin-top: 100px; text-align: center;">
                 <ons-col>
                    <button class="button button-light">
-                   This Morning                   
+                   This Morning
                     </button>
- 
+
                 </ons-col>
             </ons-row>
-                        <ons-row style="margin-top: 10px; text-align: center;">
+            <ons-row style="margin-top: 10px; text-align: center;">
                 <ons-col>
                    <button class="button button-light">
-                   This Evening                   
+                   This Evening
                     </button>
- 
+
                 </ons-col>
             </ons-row>
-            
              <ons-row style="margin-top: 10px; text-align: center;">
                 <ons-col>
                    <button class="button button-light">
-                   Tomorrow                  
+                   Tomorrow
                     </button>
- 
-                </ons-col>
-            </ons-row>
-            
-                  <ons-row style="margin-top: 10px; text-align: center;">
-                <ons-col>
-                   <button class="button button-light">
-                   This Week                 
-                    </button>
- 
-                </ons-col>
-            </ons-row>
-            
-                              <ons-row style="margin-top: 10px; text-align: center;">
-                <ons-col>
-                   <button class="button button-light">
-                   Next week                 
-                    </button>
- 
-                </ons-col>
-            </ons-row>
 
+                </ons-col>
+            </ons-row>
+            <ons-row style="margin-top: 10px; text-align: center;">
+                <ons-col>
+                   <button class="button button-light">
+                   This Week
+                    </button>
+
+                </ons-col>
+            </ons-row>
+            <ons-row style="margin-top: 10px; text-align: center;">
+                <ons-col>
+                   <button class="button button-light">
+                   Next week
+                    </button>
+
+                </ons-col>
+            </ons-row>
             <ons-row style="margin-top: 110px; margin-left:120px; text-align: center;">
                 <ons-col>
                      <ons-icon icon="ion-ios-arrow-forward" size="28px" fixed-width="false"></ons-icon>
                 </ons-col>
             </ons-row>
-            
- <ons-row style="margin-top: -25px; margin-left:-120px; text-align: center;">
+            <ons-row style="margin-top: -25px; margin-left:-120px; text-align: center;">
                 <ons-col>
- <ons-icon icon="ion-ios-arrow-back" size="28px" fixed-width="false"></ons-icon>
+                  <ons-icon icon="ion-ios-arrow-back" size="28px" fixed-width="false"></ons-icon>
                 </ons-col>
-            </ons-row> 
-            
-            
- <ons-row style="margin-top: -28px; margin-left:90px; text-align: center;">
+            </ons-row>
+            <ons-row style="margin-top: -28px; margin-left:90px; text-align: center;">
                 <ons-col>
                      Next
                 </ons-col>
             </ons-row>
-            
-<ons-row style="margin-top: -20px; margin-left:-90px; text-align: center;">
+            <ons-row style="margin-top: -20px; margin-left:-90px; text-align: center;">
                 <ons-col>
                      Back
                 </ons-col>
-            </ons-row> 
-                   
-            
-            
+            </ons-row>
+
         </ons-page>
     </ons-template>
-        
-        
-          <ons-template id="settings.html">
+
+
+    <ons-template id="settings.html">
         <ons-page ng-controller="SettingsController">
             <ons-toolbar>
                 <div class="left">
@@ -352,10 +348,9 @@
 
         </ons-page>
     </ons-template>
-        
-        
-        
-          <ons-template id="help.html">
+
+
+    <ons-template id="help.html">
         <ons-page ng-controller="HelpController">
 
             <ons-toolbar>
@@ -378,6 +373,6 @@
 
         </ons-page>
     </ons-template>
-        
+
 </body>
 </html>
