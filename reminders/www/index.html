@@ -168,6 +168,54 @@
         </ons-page>
     </ons-template>
 
+    
+         
+    <ons-template id="task.html">
+        <ons-page ng-controller="TimeController">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button ng-click="menu.toggle()">
+                        <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">Task/Title</div>
+            </ons-toolbar>
+
+
+            <ons-row style="margin-top: 100px; text-align: center;">
+                
+
+            <ons-row style="margin-top: 110px; margin-left:120px; text-align: center;">
+                <ons-col>
+ <ons-icon icon="ion-ios-arrow-forward" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>
+            
+ <ons-row style="margin-top: -25px; margin-left:-120px; text-align: center;">
+                <ons-col>
+ <ons-icon icon="ion-ios-arrow-back" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row> 
+            
+            
+ <ons-row style="margin-top: -28px; margin-left:90px; text-align: center;">
+                <ons-col>
+                     Next
+                </ons-col>
+            </ons-row>
+            
+<ons-row style="margin-top: -20px; margin-left:-90px; text-align: center;">
+                <ons-col>
+                     Back
+                </ons-col>
+            </ons-row> 
+                   
+            
+            
+        </ons-page>
+    </ons-template> 
+        
+       
 
     <ons-template id="category.html">
                 <ons-page ng-controller="CategoryController">
