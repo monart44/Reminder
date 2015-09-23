@@ -13,7 +13,23 @@
     });
 
     module.controller('CategoryController', function($scope, $data) {
+        console.log($scope.reminder_title);
         
+        $scope.nav = function() {
+            $scope.$apply();
+            homeNavigator.pushPage('time.html', { animation : 'slide' } );
+        }
+
+    });
+    
+    module.controller('TaskController', function($scope, $data) {
+        
+        $scope.nav = function() {
+            $scope.$apply();
+            homeNavigator.pushPage('category.html', { animation : 'slide' } )
+        }
+        
+        $scope.reminder_title = {};
 
     });
     
