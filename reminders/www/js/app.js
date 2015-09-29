@@ -1,10 +1,10 @@
 (function(){
   'use strict';
-  var module = angular.module('app', ['onsen']);
+  var module = angular.module('app', ['onsen', 'service', 'ui.bootstrap', 'ngAnimate']);
     
     
-    module.controller('HomeController', function($scope, $data) {
-    
+    module.controller('HomeController', function($scope, $data, ParseService) {
+     
         $scope.newReminder = function() {
           console.log('new reminder!');
           $scope.home-nav.pushPage('new.html');
@@ -13,10 +13,17 @@
     });
 
     module.controller('CategoryController', function($scope, $data) {
-        console.log($scope.reminder_title);
+        
+        $scope.category = {};
+        
+        $scope.setCurrentCategory = function(category) {
+          console.log(category);   
+          $scope.category = category;
+          //$scope.$apply();
+        }
         
         $scope.nav = function() {
-            $scope.$apply();
+            console.log($scope.category);
             homeNavigator.pushPage('time.html', { animation : 'slide' } );
         }
 
@@ -30,88 +37,95 @@
         }
         
         $scope.reminder_title = {};
+        
+
+    //var init = function () {
+     // if($scope.currentUser) {
+     //   console.log("Task: " + $scope.currentUser.addtask() );
+     //   $scope.navigator.pushPage("time.html");
+    //  }
+     // else {
 
     });
     
     module.controller('TimeController', function($scope, $data) {
-   // angular.module('ui.bootstrap.demo').controller('DatepickerDemoCtrl', function ($scope) {
- // $scope.today = function() {
-   // $scope.dt = new Date();
- // };
-  //$scope.today();
+            
+      $scope.today = function() {
+        $scope.dt = new Date();
+      };
+      $scope.today();
 
-  //$scope.clear = function () {
-   // $scope.dt = null;
-  //};
+      $scope.clear = function () {
+        $scope.dt = null;
+      };
 
-  // Disable weekend selection
-  //$scope.disabled = function(date, mode) {
-   // return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-//  };
+      $scope.disabled = function(date, mode) {
+        return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+      };
 
- // $scope.toggleMin = function() {
- //   $scope.minDate = $scope.minDate ? null : new Date();
-//  };
-//  $scope.toggleMin();
-//  $scope.maxDate = new Date(2020, 5, 22);
+      $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : new Date();
+      };
+      $scope.toggleMin();
+      $scope.maxDate = new Date(2020, 5, 22);
 
-//  $scope.open = function($event) {
- //   $scope.status.opened = true;
- // };
+      $scope.open = function($event) {
+        $scope.status.opened = true;
+      };
 
- // $scope.dateOptions = {
- //   formatYear: 'yy',
-  //  startingDay: 1
- // };
+      $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+      };
 
-  // $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
- // $scope.format = $scope.formats[0];
+       $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+      $scope.format = $scope.formats[0];
 
- // $scope.status = {
- //   opened: false
- //  };
+      $scope.status = {
+        opened: false
+       };
 
- // var tomorrow = new Date();
- // tomorrow.setDate(tomorrow.getDate() + 1);
- // var afterTomorrow = new Date();
- // afterTomorrow.setDate(tomorrow.getDate() + 2);
- // $scope.events =
-  //  [
-  //    {
-  //      date: tomorrow,
-  //      status: 'full'
-   //   },
-   //   {
-   //     date: afterTomorrow,
-   //     status: 'partially'
-   //   }
-   // ];
+      var tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      var afterTomorrow = new Date();
+      afterTomorrow.setDate(tomorrow.getDate() + 2);
+      $scope.events =
+        [
+          {
+            date: tomorrow,
+            status: 'full'
+          },
+          {
+            date: afterTomorrow,
+            status: 'partially'
+          }
+        ];
 
- // $scope.getDayClass = function(date, mode) {
-  //  if (mode === 'day') {
-  //    var dayToCheck = new Date(date).setHours(0,0,0,0);
+      $scope.getDayClass = function(date, mode) {
+        if (mode === 'day') {
+          var dayToCheck = new Date(date).setHours(0,0,0,0);
 
-   //   for (var i=0;i<$scope.events.length;i++){
-    //    var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+          for (var i=0;i<$scope.events.length;i++){
+            var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
 
-    //    if (dayToCheck === currentDay) {
-      //    return $scope.events[i].status;
-    //    }
-   //   }
-   // }
+            if (dayToCheck === currentDay) {
+              return $scope.events[i].status;
+            }
+          }
+        }
 
-  //  return '';
- // };
-//}); 
-    
-    });
-    
-        module.controller('SettingsController', function($scope, $data) {
+        return '';
+      };
     
     
     });
     
-        module.controller('HelpController', function($scope, $data) {
+    module.controller('SettingsController', function($scope, $data) {
+    
+    
+    });
+    
+    module.controller('HelpController', function($scope, $data) {
     
     
     });
