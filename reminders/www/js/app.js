@@ -29,22 +29,16 @@
 
     });
     
-    module.controller('TaskController', function($scope, $data) {
-        
-        $scope.nav = function() {
-            $scope.$apply();
-            homeNavigator.pushPage('category.html', { animation : 'slide' } )
-        }
-        
-        $scope.reminder_title = {};
-        
+    
+    
+    
+    
+    
+   module.controller('TaskController', function($scope, $data) {
 
-    //var init = function () {
-     // if($scope.currentUser) {
-     //   console.log("Task: " + $scope.currentUser.addtask() );
-     //   $scope.navigator.pushPage("time.html");
-    //  }
-     // else {
+    $scope.commentNode = function(comment) {
+        console.log('Note is ' + $scope.note);
+    };
 
     });
     

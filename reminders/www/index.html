@@ -140,7 +140,6 @@
 
 
     <ons-template id="home.html">
-      <!--  MONA ! This is the most important part - the navigator. It allows you to push new pages, and pop them too! -->
       <ons-navigator title="Navigator" var="homeNavigator">
         <ons-page ng-controller="HomeController">
 
@@ -152,7 +151,7 @@
                 </div>
                 <div class="center">Home</div>
                 <div class="right">
-                  <!--  MONA ! the navigator is working. Feel free to tweak. -->
+
                     <ons-toolbar-button ng-click="homeNavigator.pushPage('task.html', { animation : 'slide' } )">
                         <ons-icon icon="ion-plus-round " size="28px" fixed-width="false"></ons-icon>
                     </ons-toolbar-button>
@@ -166,7 +165,7 @@
 
 
     <ons-template id="task.html">
-        <ons-page>
+        <ons-page ng-controller="TaskController">
 
           <ons-toolbar>
             <div class="left">
@@ -180,8 +179,11 @@
           </ons-toolbar>
     <p style="text-align:center;margin-left:auto;margin-right:auto;">Add A new Title/Task</p>
             
-<div class="login-form">
-              <input style="display:block; margin-right:auto; margin-left:auto;" type="text" class="text-input" placeholder="text" value="" ng-model="login_username">
+ <ons-list-item>
+          <input type="text" class="text-input" placeholder="add a note" value="" ng-model="note">
+          <ons-button class="detail-button" ng-click="commentNode(note)">submit</ons-button>
+        </ons-list-item>
+
             
           </ons-toolbar>
         </ons-page>
@@ -193,7 +195,7 @@
 
 
 
-<ons-template id="category.html">
+    <ons-template id="category.html">
         <ons-page ng-controller="CategoryController">
 
           <ons-toolbar>
@@ -202,7 +204,7 @@
             </div>
             <div class="center">Category</div>
             <div class="right">
-                <!--  MONA ! you can change where the button lives on the page, and which page it goes to here -->
+
                 <ons-toolbar-button ng-click="homeNavigator.pushPage('time.html', { animation : 'slide' } )"> Next </ons-toolbar-button>
             </div>
           </ons-toolbar>
@@ -258,6 +260,7 @@
 
     <ons-template id="time.html">
         <ons-page ng-controller="TimeController">
+            
             <ons-toolbar>
             <div class="left">
               <ons-back-button>Back</ons-back-button>
@@ -348,24 +351,32 @@
                 
                 
     <ons-template id="alarm.html">
+        <ons-page>
          <ons-toolbar>
             <div class="left">
               <ons-back-button>Back</ons-back-button>
             </div>
             <div class="center">Alarm</div>
             <div class="right">
-                
-                <ons-toolbar-button ng-click="homeNavigator.pushPage('home.html', { animation : 'slide' } )"> Next </ons-toolbar-button>
+                <ons-toolbar-button ng-click="homeNavigator.resetToPage('home.html', { animation : 'slide' } )"> Next </ons-toolbar-button>
             </div>
           </ons-toolbar>
          <ons-row style="margin-top: 100px; text-align: center;">
                 <ons-col>
-                     <ons-icon icon="ion-android-notifications" size="28px" fixed-width="false"></ons-icon>
+        <ons-icon icon="ion-android-notifications" Style="display:block; margin-left:180px;" size="50px"></ons-icon>
                 </ons-col>
              
-             <p style="position:absolute; top:200px; right:100px;" >Yes</p>
-            </ons-row>
- <p style="position:absolute; top:200px; left:100px;">No</p>
+             <label style="margin-top:100px; margin-right:100px;"class="checkbox">
+  <input type="checkbox" checked="checked">
+  <div class="checkbox__checkmark"></div>
+  ON
+</label><br>
+
+<label style="margin-top:100px; margin-right:90px;" class="checkbox">
+  <input type="checkbox">
+  <div class="checkbox__checkmark"></div>
+  OFF
+</label>
             </ons-row>
 
 
