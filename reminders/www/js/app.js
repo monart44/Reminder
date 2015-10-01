@@ -13,7 +13,7 @@
     });
 
  
-    module.controller('ReminderController', function($scope, $data) {
+    module.controller('ReminderController', function($scope, $data, ParseService) {
         
         
       $scope.setCurrentCategory = function(category) {
@@ -28,6 +28,15 @@
          console.log("Date is " + $scope.dt);
          console.log("Alarm is " + $scope.alarm.isChecked());
       };
+        
+      $scope.addReminder = function() {
+        ParseService.addReminder(
+          $scope.task, $scope.category, $scope.dt,
+          $scope.alarm.isChecked, function(object) {
+            alert('reminder added');
+            $scope.navigator.popPage();
+        });
+      }
         
       // Navigation
       $scope.nav = function(_page) {

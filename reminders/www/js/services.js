@@ -86,60 +86,26 @@ Parse.initialize("lGvFfn42wkkLHZJIjduI7ex6NFocDrxE1ZxmPG7b", "HgGeVwiMvuAUoRE9Lt
       },
 
       // Create A New Node
-      addNode : function addNode(_ssid, _pwd, _biz, _sec, _nts, _usr, _loc, _img, callback) {
-
-        if(_ssid == null || _pwd == null || _biz == null || _sec == null) {
-            alert('please fill in all fields');
-            return;
-        }
-
-        if(_nts == null) _nts == "";
-        var _ntsArray = [_nts];
-
-        if(_loc == null) {
-          _loc = new Parse.GeoPoint(0.0, 0.0);
-        }
-
-        /*
-        var img;
-        if(_img == null) {
-          img = new Image();
-          img.src = "img/foo.jpg"; // sketchy
-          _img = img;
-          //console.log(img);
-        }
-        var parseFile = new Parse.File("image.jpg", _img);
-        //console.log(parseFile);
-        parseFile.save().then(
-        function() {
-          console.log('File Saved...');
-          //supposed to call Object save here ???
-        },
-        function(error) {
-          console.log('File Error: ' + error.code);
-        });
-        */
-        console.log('NET: ' + _ssid);
-        console.log('PWD: ' + _pwd);
-        console.log('BIZ: ' + _biz);
-        console.log('SEC: ' + _sec);
-        console.log('NTS: ' + _nts);
-        console.log('USR: ' + _usr);
-        console.log('LOC: ' + _loc);
-        console.log('IMG: ' + _img);
+      addReminder : function addReminder(_task, _category, _date, _alarm, callback) {
+        console.log('TASK: ' + _task);
+        console.log('CAT: ' + _category);
+        console.log('DATE: ' + _date);
+        console.log('ALARM: ' + _alarm);
+          
+        var yesno = false;
+        if(_alarm === "yes")
+            yesno = true;
+        else
+            yesno = false;
 
         var params = {
-          ssid:_ssid,
-          password:_pwd,
-          owner:_biz,
-          security:_sec,
-          notes:_ntsArray,
-          addedBy:_usr,
-          point:_loc/*,
-          thumbnail:parseFile // ERROR*/
+          title:_task,
+          category:_category,
+          time:_date,
+          alarm:yesno
         };
 
-        var object = new Node();
+        var object = new Reminder();
         object.save(params, {
           success: function(object) {
             callback();
