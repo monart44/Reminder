@@ -13,32 +13,31 @@
     });
 
  
-    module.controller('ReminderController', function($scope, $rootScope, $data) {
+    module.controller('ReminderController', function($scope, $data) {
             
       // Variables
-      $rootScope.alarm = {};
-      $rootScope.category = {};
-      $rootScope.task = {};
+      $scope.alarm = {};
+      $scope.category = {};
+      $scope.task = {};
         
         
         
       $scope.setCurrentCategory = function(category) {
-        $rootScope.category = category;
+        $scope.category = category;
         console.log('Category set to ' + $scope.category);
       }
       
       // Values
       $scope.checkValues = function() {
-         console.log("Task is " + $rootScope.task);
-         console.log("Category is " + $rootScope.category);
-         console.log("Date is " + $rootScope.dt);
-         //console.log("Alarm is " + $rootScope.alarm.isChecked());
+         console.log("Task is " + $scope.task);
+         console.log("Category is " + $scope.category);
+         console.log("Date is " + $scope.dt);
+         console.log("Alarm is " + $scope.alarm.isChecked());
       };
         
       // Navigation
       $scope.nav = function(_page) {
         console.log(_page);
-        $scope.checkValues();
         homeNavigator.pushPage(_page, { animation : 'slide' } )   
       }
         

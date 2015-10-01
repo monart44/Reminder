@@ -152,7 +152,7 @@
                 <div class="center">Home</div>
                 <div class="right">
 
-                    <ons-toolbar-button ng-click="homeNavigator.pushPage('task.html', { animation : 'slide' } )">
+                    <ons-toolbar-button ng-click="homeNavigator.pushPage('reminder.html', { animation : 'slide' } )">
                         <ons-icon icon="ion-plus-round " size="28px" fixed-width="false"></ons-icon>
                     </ons-toolbar-button>
                 </div>
@@ -165,7 +165,7 @@
 
 
     <!-- REMINDER PAGES -->
-    <ons-template id="task.html">
+    <ons-template id="reminder.html">
         <ons-page ng-controller="ReminderController">
 
           <ons-toolbar>
@@ -178,153 +178,88 @@
             </div>
           </ons-toolbar>
             
-            <p style="text-align:center;margin-left:auto;margin-right:auto;">Add A new Title/Task</p>
-            
-        <ons-list-item>
-          <input type="text" class="text-input" placeholder="add a title" value="" ng-model="task">
-        </ons-list-item>
-
-            
-          </ons-toolbar>
-        </ons-page>
-    </ons-template>
+            <p style="text-align:center;margin-left:auto;margin-right:auto;">Add A new Title/Task</p>            
+            <ons-list-item>
+              <input type="text" class="text-input" placeholder="add a title" value="" ng-model="task">
+            </ons-list-item>
 
 
-    <ons-template id="category.html">
-        <ons-page ng-controller="ReminderController">
-
-          <ons-toolbar>
-            <div class="left">
-              <ons-back-button>Back</ons-back-button>
-            </div>
-            <div class="center">Category</div>
-            <div class="right">
-                <ons-toolbar-button ng-click="nav('time.html')"> Next </ons-toolbar-button>
-            </div>
-          </ons-toolbar>
             <p style="text-align:center;margin-left:auto;margin-right:auto;">Choose A Category</p>
-
             <ons-row style="margin-top: 100px; text-align: center;">
-            <ons-col>
-            <ons-icon  ng-click="setCurrentCategory('work')" icon="ion-ios-briefcase" size="28px" fixed-width="false"></ons-icon>
-            </ons-col>
-                        </ons-row>
-
-            <ons-row style="margin-top: -25px; margin-left:70px; text-align: center;">
-            <ons-col>
-            <ons-icon ng-click="setCurrentCategory('leisure')" icon="ion-beer" size="28px" fixed-width="false"></ons-icon>
-            </ons-col>
-            </ons-row>
-
-     <ons-row style="margin-top: -25px; margin-left:-70px; text-align: center;">
-<ons-col>
-<ons-icon  ng-click="setCurrentCategory('shop')"icon="ion-ios-cart" size="28px" fixed-width="false"></ons-icon>
-                </ons-col>
-            </ons-row>
-
-<ons-row style="margin-top: 30px; margin-left:-70px; text-align: center;">
                 <ons-col>
-<ons-icon ng-click="setCurrentCategory('call')" icon="ion-ios-telephone" size="28px" fixed-width="false"></ons-icon>
+                    <ons-icon  ng-click="setCurrentCategory('work')" icon="ion-ios-briefcase" size="28px" fixed-width="false"></ons-icon>
                 </ons-col>
             </ons-row>
-
+            <ons-row style="margin-top: -25px; margin-left:70px; text-align: center;">
+                <ons-col>
+                    <ons-icon ng-click="setCurrentCategory('leisure')" icon="ion-beer" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>
+            <ons-row style="margin-top: -25px; margin-left:-70px; text-align: center;">
+                <ons-col>
+                    <ons-icon  ng-click="setCurrentCategory('shop')"icon="ion-ios-cart" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>
+            <ons-row style="margin-top: 30px; margin-left:-70px; text-align: center;">
+                <ons-col>
+                    <ons-icon ng-click="setCurrentCategory('call')" icon="ion-ios-telephone" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>
             <ons-row style="margin-top: -25px; text-align: center;">
                 <ons-col>
-<ons-icon ng-click="setCurrentCategory('meeting')" icon="ion-ios-people" size="28px" fixed-width="false"></ons-icon>
+                    <ons-icon ng-click="setCurrentCategory('meeting')" icon="ion-ios-people" size="28px" fixed-width="false"></ons-icon>
                 </ons-col>
             </ons-row>
-
-
-<ons-row style="margin-top: -30px; margin-left:60px; text-align: center;">
+            <ons-row style="margin-top: -30px; margin-left:60px; text-align: center;">
                 <ons-col>
-<ons-icon ng-click="setCurrentCategory('travel')" icon="ion-plane" size="28px" fixed-width="false"></ons-icon>
+                    <ons-icon ng-click="setCurrentCategory('travel')" icon="ion-plane" size="28px" fixed-width="false"></ons-icon>
                 </ons-col>
             </ons-row>
-            </div>
-          </ons-toolbar>
+       
+            <p style="text-align:center;margin-left:auto;margin-right:auto;">Choose A Time</p>
+            <div>
+                <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
 
+                <h4 style="text-align:center">Inline</h4>
+                <div style="display:inline-block; min-height:290px;margin-left:40px;">
+                  <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)">       </datepicker>
+                </div>
 
+                <h4 style="text-align:center;">Popup</h4>
+                <div style="margin-left:5px;"class="row">
+                    <div class="col-md-6">
+                        <p class="input-group">
+                          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                        </p>
+                    </div>
 
-        </ons-page>
-    </ons-template>
+                    <div class="col-md-6">
+                        <p class="input-group">
+                          <input type="date" class="form-control" datepicker-popup ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label style="margin-left:170px;">Format:</label> 
+            <select Style="margin-left:20px;" class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>
+                    </div>
+                </div>
 
+                <hr />
+                <button style="margin-left:20px;margin-top:-40px;" type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
+                <button style="margin-top:-40px;" type="button" class="btn btn-sm btn-default" ng-click="dt = '2009-08-24'">2009-08-24</button>
+                <button style="margin-top:-40px;" type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
+                <button style="margin-top:-40px;" type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" tooltip="After today restriction">Min date</button>
+            </div> 
 
-    <ons-template id="time.html">
-        <ons-page ng-controller="ReminderController">
-            
-            <ons-toolbar>
-            <div class="left">
-              <ons-back-button>Back</ons-back-button>
-            </div>
-            <div class="center">Time</div>
-            <div class="right">
-                <ons-toolbar-button ng-click="nav('alarm.html')"> Next </ons-toolbar-button>
-            </div>
-          </ons-toolbar>
-
-            <P style="text-align:center;margin-left:auto;margin-right:auto;">Choose A Time</P>
-
-         
-
-<div>
-    <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
-
-    <h4 style="text-align:center">Inline</h4>
-    <div style="display:inline-block; min-height:290px;margin-left:40px;">
-      <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></datepicker>
-    </div>
-
-    <h4 style="text-align:center;">Popup</h4>
-    <div style="margin-left:5px;"class="row">
-        <div class="col-md-6">
-            <p class="input-group">
-              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-            </p>
-        </div>
-
-        <div class="col-md-6">
-            <p class="input-group">
-              <input type="date" class="form-control" datepicker-popup ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <label style="margin-left:170px;">Format:</label> 
-<select Style="margin-left:20px;" class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>
-        </div>
-    </div>
-
-    <hr />
-    <button style="margin-left:20px;margin-top:-40px;" type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
-    <button style="margin-top:-40px;" type="button" class="btn btn-sm btn-default" ng-click="dt = '2009-08-24'">2009-08-24</button>
-    <button style="margin-top:-40px;" type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
-    <button style="margin-top:-40px;" type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" tooltip="After today restriction">Min date</button>
-</div> 
-
-    
-        </ons-page>
-    </ons-template>
-
-                
-    <ons-template id="alarm.html">
-        <ons-page ng-controller="ReminderController">
-         <ons-toolbar>
-            <div class="left">
-              <ons-back-button>Back</ons-back-button>
-            </div>
-            <div class="center">Alarm</div>
-            <div class="right">
-                <ons-toolbar-button ng-click="nav('home.html')"> Next </ons-toolbar-button>
-            </div>
-          </ons-toolbar>
-         
+            <p style="text-align:center;margin-left:auto;margin-right:auto;">Set the Alamr ?</p>
             <ons-row style="margin-top: 100px; text-align: center;">
                 <ons-col>
                     <ons-icon icon="ion-android-notifications" Style="display:block; margin-left:180px;" size="50px"></ons-icon>
@@ -333,8 +268,8 @@
             <ons-row style="margin-top: 100px; text-align: center;">
                 <ons-switch var="alarm" Style="display:block; margin-left:180px;" checked></ons-switch>
             </ons-row>
-
-         <ons-button ng-click="checkValues()">Check Values</ons-button>
+            
+            <ons-button ng-click="checkValues()">Check Values</ons-button>
 
 
           
