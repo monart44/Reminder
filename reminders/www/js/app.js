@@ -30,6 +30,32 @@
     });
     
     
+    module.controller('AlarmController', function($scope, $data) {
+        
+        $scope.title = {};
+        $scope.alamrBoolean = {};
+        
+        
+        $scope.title.isSelected = function(checked) {
+          console.log(title);   
+          $scope.title = checked;
+          //$scope.$apply();
+        }
+        
+         $scope.checkSwitch = function() {
+            console.log($scope.alarmBoolean.isChecked());
+          };
+        
+        $scope.nav = function() {
+
+            //console.log($scope.category);
+            //homeNavigator.pushPage('home.html', { animation : 'slide' } );
+            homeNavigator.resetToPage('home.html', { animation : 'slide' } )
+        }
+
+    });
+    
+    
     
     
     
@@ -44,6 +70,11 @@
     
     module.controller('TimeController', function($scope, $data) {
             
+      $scope.nav = function() {
+        console.log($scope.dt);
+        homeNavigator.pushPage('alarm.html', { animation : 'slide' } )   
+      }
+        
       $scope.today = function() {
         $scope.dt = new Date();
       };

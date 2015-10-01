@@ -267,8 +267,7 @@
             </div>
             <div class="center">Time</div>
             <div class="right">
-                <!--  MONA ! you can change where the button lives on the page, and which page it goes to here -->
-                <ons-toolbar-button ng-click="homeNavigator.pushPage('alarm.html', { animation : 'slide' } )"> Next </ons-toolbar-button>
+                <ons-toolbar-button ng-click="nav()"> Next </ons-toolbar-button>
             </div>
           </ons-toolbar>
 
@@ -351,33 +350,27 @@
                 
                 
     <ons-template id="alarm.html">
-        <ons-page>
+        <ons-page ng-controller="AlarmController">
          <ons-toolbar>
             <div class="left">
               <ons-back-button>Back</ons-back-button>
             </div>
             <div class="center">Alarm</div>
             <div class="right">
-                <ons-toolbar-button ng-click="homeNavigator.resetToPage('home.html', { animation : 'slide' } )"> Next </ons-toolbar-button>
+                <ons-toolbar-button ng-click="nav()"> Next </ons-toolbar-button>
             </div>
           </ons-toolbar>
-         <ons-row style="margin-top: 100px; text-align: center;">
+         
+            <ons-row style="margin-top: 100px; text-align: center;">
                 <ons-col>
-        <ons-icon icon="ion-android-notifications" Style="display:block; margin-left:180px;" size="50px"></ons-icon>
+                    <ons-icon icon="ion-android-notifications" Style="display:block; margin-left:180px;" size="50px"></ons-icon>
                 </ons-col>
-             
-             <label style="margin-top:100px; margin-right:100px;"class="checkbox">
-  <input type="checkbox" checked="checked">
-  <div class="checkbox__checkmark"></div>
-  ON
-</label><br>
-
-<label style="margin-top:100px; margin-right:90px;" class="checkbox">
-  <input type="checkbox">
-  <div class="checkbox__checkmark"></div>
-  OFF
-</label>
             </ons-row>
+            <ons-row style="margin-top: 100px; text-align: center;">
+                <ons-switch var="alarmBoolean" Style="display:block; margin-left:180px;" checked></ons-switch>
+            </ons-row>
+
+<!--         <ons-button ng-click="checkSwitch()">Check switch status</ons-button>-->
 
 
           
