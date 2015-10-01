@@ -14,12 +14,6 @@
 
  
     module.controller('ReminderController', function($scope, $data) {
-            
-      // Variables
-      $scope.alarm = {};
-      $scope.category = {};
-      $scope.task = {};
-        
         
         
       $scope.setCurrentCategory = function(category) {
