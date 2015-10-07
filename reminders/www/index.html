@@ -1,387 +1,297 @@
 <!DOCTYPE html>
 <!-- CSP support mode (required for Windows Universal apps): https://docs.angularjs.org/api/ng/directive/ngCsp -->
 <html lang="en" ng-app="app" ng-csp>
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="mobile-web-app-capable" content="yes" />
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
 
-  <!-- JS dependencies (order matters!) -->
-  <script src="scripts/platformOverrides.js"></script>
-  <script src="lib/angular/angular.js"></script>
-  <script src="lib/onsen/js/onsenui.js"></script>
+    <!-- JS dependencies (order matters!) -->
+    <script src="scripts/platformOverrides.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-animate.min.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script src="http://www.parsecdn.com/js/parse-1.6.2.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
 
-  <!-- CSS dependencies -->
-  <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
-  <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-blue-basic-theme.css" />
+    <!-- CSS dependencies -->
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-blue-basic-theme.css" />
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- CSP support mode (required for Windows Universal apps) -->
-  <link rel="stylesheet" href="lib/angular/angular-csp.css" />
+    <!-- CSP support mode (required for Windows Universal apps) -->
+    <link rel="stylesheet" href="lib/angular/angular-csp.css" />
 
 
-  <!-- --------------- App init --------------- -->
+    <!-- --------------- App init --------------- -->
 
-  <title>Onsen UI Sliding Menu</title>
+    <title>Onsen UI Sliding Menu</title>
 
-  <script>
-    angular.module('app', ['onsen']);
-  </script>
+    <script>
+        angular.module('app', ['onsen']);
+    </script>
 
-  <style>
-    .page--menu-page__background {
-      background-color: #333;
-    }
+    <style>
+        .page--menu-page__background {
+            background-color: #333;
+        }
 
-    .page--menu-page__content {
-      color: white;
-    }
+        .page--menu-page__content {
+            color: white;
+        }
 
-    .menu-close,
-    .menu-close > .toolbar-button {
-      color: #999;
-    }
+        .full button span {
+            background-color: limegreen;
+            border-radius: 32px;
+            color: black;
+          }
+          .partially button span {
+            background-color: orange;
+            border-radius: 32px;
+            color: black;
+          }
 
-    .menu-list,
-    .menu-item:first-child,
-    .menu-item:last-child,
-    .menu-item {
-      background-color: transparent;
-      background-image: none !important;
-      border-color: transparent;
-      color: #fff;
-    }
+        .menu-close,
+        .menu-close > .toolbar-button {
+            color: #999;
+        }
 
-    .menu-item {
-      padding: 0 0 0 20px;
-      line-height: 52px;
-      height: 52px;
-      text-shadow: rgba(0, 0, 0, 0.4) 0px 1px 0px;
-    }
+        .menu-list,
+        .menu-item:first-child,
+        .menu-item:last-child,
+        .menu-item {
+            background-color: transparent;
+            background-image: none !important;
+            border-color: transparent;
+            color: #fff;
+        }
 
-    .menu-item:active {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
+        .menu-item {
+            padding: 0 0 0 20px;
+            line-height: 52px;
+            height: 52px;
+            text-shadow: rgba(0, 0, 0, 0.4) 0px 1px 0px;
+        }
 
-    .menu-notification {
-      display: inline-block;
-      margin-top: 12px;
-      font-size: 14px;
-      height: 16px;
-      line-height: 16px;
-      min-width: 16px;
-      font-weight: 600;
-    }
+            .menu-item:active {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
 
-    .bottom-menu-list,
-    .bottom-menu-item:first-child,
-    .bottom-menu-item:last-child,
-    .bottom-menu-item {
-      border-color: #393939;
-      background-color: transparent;
-      background-image: none !important;
-      color: #ccc;
-    }
+        .menu-notification {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 14px;
+            height: 16px;
+            line-height: 16px;
+            min-width: 16px;
+            font-weight: 600;
+        }
 
-    .bottom-menu-item:active {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-  </style>
+        .bottom-menu-list,
+        .bottom-menu-item:first-child,
+        .bottom-menu-item:last-child,
+        .bottom-menu-item {
+            border-color: #393939;
+            background-color: transparent;
+            background-image: none !important;
+            color: #ccc;
+        }
+
+            .bottom-menu-item:active {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+    </style>
 
 </head>
 
 <body>
-  <!-- Cordova reference -->
-  <script src="cordova.js"></script>
-  <script src="scripts/index.js"></script>
-  <script src="js/app.js"></script>
-  <!-- -->
+    <!-- Cordova reference -->
+    <script src="cordova.js"></script>
+    <script src="scripts/index.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <!-- -->
 
 
-  <ons-sliding-menu menu-page="menu.html" main-page="home.html" side="left" var="menu" type="reveal" max-slide-distance="260px" swipeable="true">
-  </ons-sliding-menu>
+    <ons-sliding-menu menu-page="menu.html" main-page="home.html" side="left"
+                      var="menu" type="reveal" max-slide-distance="260px" swipeable="true">
+    </ons-sliding-menu>
+
+    <!-- HOME PAGES -->
+
+    <ons-template id="menu.html">
+        <ons-page modifier="menu-page">
+            <ons-toolbar modifier="transparent"></ons-toolbar>
+
+            <ons-list class="menu-list">
+                                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('home.html', {closeMenu: true})">
+                    Home
+                </ons-list-item>
 
 
-  <ons-template id="menu.html">
-    <ons-page modifier="menu-page">
-      <ons-toolbar modifier="transparent"></ons-toolbar>
 
-      <ons-list class="menu-list">
-        <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('home.html', {closeMenu: true})">
-          Home
-        </ons-list-item>
+                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('help.html', {closeMenu: true})">
+                    Help
+                </ons-list-item>
 
 
+            </ons-list>
+        </ons-page>
+    </ons-template>
 
-        <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('help.html', {closeMenu: true})">
-          Help
-        </ons-list-item>
+    <ons-template id="home.html">
+      <ons-navigator title="Navigator" var="homeNavigator">
+        <ons-page ng-controller="HomeController">
 
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button ng-click="menu.toggle()">
+                        <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">Home</div>
+                <div class="right">
 
-      </ons-list>
-    </ons-page>
-  </ons-template>
-
-
-  <ons-template id="home.html">
-    <!--  MONA ! This is the most important part - the navigator. It allows you to push new pages, and pop them too! -->
-    <ons-navigator title="Navigator" var="homeNavigator">
-      <ons-page ng-controller="HomeController">
-
-        <ons-toolbar>
-          <div class="left">
-            <ons-toolbar-button ng-click="menu.toggle()">
-              <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
-            </ons-toolbar-button>
-          </div>
-          <div class="center">Home</div>
-          <div class="right">
-            <!--  MONA ! the navigator is working. Feel free to tweak. -->
-            <ons-toolbar-button ng-click="homeNavigator.pushPage('task.html', { animation : 'slide' } )">
-              <ons-icon icon="ion-plus-round " size="28px" fixed-width="false"></ons-icon>
-            </ons-toolbar-button>
-          </div>
-        </ons-toolbar>
+                    <ons-toolbar-button ng-click="homeNavigator.pushPage('reminder.html', { animation : 'slide' } )">
+                        <ons-icon icon="ion-plus-round " size="28px" fixed-width="false"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
 
 
-      </ons-page>
-    </ons-navigator>
-  </ons-template>
+        </ons-page>
+      </ons-navigator>
+    </ons-template>
 
 
-  <ons-template id="task.html">
-    <ons-page ng-controller="TaskController">
+    <!-- REMINDER -->
+    <ons-template id="reminder.html">
+        <ons-page ng-controller="ReminderController">
 
-      <ons-toolbar>
-        <div class="left">
-          <ons-back-button>Back</ons-back-button>
-        </div>
-        <div class="center">Task/Title</div>
-        <div class="right">
-          <!--  MONA ! you can change where the button lives on the page, and which page it goes to here -->
-          <ons-toolbar-button ng-click="nav()"> Next </ons-toolbar-button>
-        </div>
-      </ons-toolbar>
+          <ons-toolbar>
+            <div class="left">
+              <ons-back-button>Back</ons-back-button>
+            </div>
+            <div class="right">
+                <ons-toolbar-button ng-click="nav('category.html')"> Next </ons-toolbar-button>
+            </div>
+          </ons-toolbar>
 
-      <p style="text-align:center;margin-left:auto;margin-right:auto;">Add a new Title/Task</p>
-      <input style="display:block;margin-left:auto;margin-right:auto;" type="text" class="text-input" placeholder="title" value="" ng-model="reminder_title">
-
-    </ons-page>
-  </ons-template>
+            <p style="text-align:center;margin-left:auto;margin-right:auto;">Add A New Title/Task</p>
+            <ons-list-item>
+              <input Style="display:block; margin-left:auto; margin-right:auto;" type="text" class="text-input" placeholder="add a title" value="" ng-model="task">
+            </ons-list-item>
 
 
-  <ons-template id="category.html">
-    <ons-page>
-
-      <ons-toolbar>
-        <div class="left">
-          <ons-back-button>Back</ons-back-button>
-        </div>
-        <div class="center">Category</div>
-        <div class="right">
-          <!--  MONA ! you can change where the button lives on the page, and which page it goes to here -->
-          <ons-toolbar-button ng-click="homeNavigator.pushPage('time.html', { animation : 'slide' } )"> Next </ons-toolbar-button>
-        </div>
-      </ons-toolbar>
-      <p style="text-align:center;margin-left:auto;margin-right:auto;">Choose A Category</p>
-
-      <ons-row style="margin-top: 100px; text-align: center;">
-        <ons-col>
-          <ons-icon icon="ion-ios-briefcase" size="28px" fixed-width="false"></ons-icon>
-        </ons-col>
-      </ons-row>
-      <ons-row style="margin-top: -25px; margin-left:70px; text-align: center;">
-        <ons-col>
-          <ons-icon icon="ion-beer" size="28px" fixed-width="false"></ons-icon>
-        </ons-col>
-      </ons-row>
-
-      <ons-row style="margin-top: -25px; margin-left:-70px; text-align: center;">
-        <ons-col>
-          <ons-icon icon="ion-ios-cart" size="28px" fixed-width="false"></ons-icon>
-        </ons-col>
-      </ons-row>
-
-      <ons-row style="margin-top: 30px; margin-left:-70px; text-align: center;">
-        <ons-col>
-          <ons-icon icon="ion-ios-telephone" size="28px" fixed-width="false"></ons-icon>
-        </ons-col>
-      </ons-row>
-
-      <ons-row style="margin-top: -25px; text-align: center;">
-        <ons-col>
-          <ons-icon icon="ion-ios-people" size="28px" fixed-width="false"></ons-icon>
-        </ons-col>
-      </ons-row>
-
-
-      <ons-row style="margin-top: -25px; margin-left:70px; text-align: center;">
-        <ons-col>
-          <ons-icon icon="ion-plus-round" size="28px" fixed-width="false"></ons-icon>
-        </ons-col>
-      </ons-row>
-      </div>
-      </ons-toolbar>
-
-      <p>{{reminder_title}}</p>
-
-
-    </ons-page>
-  </ons-template>
-
-
-  <ons-template id="time.html">
-    <ons-page ng-controller="TimeController">
-      <ons-toolbar>
-        <div class="left">
-          <ons-back-button>Back</ons-back-button>
-        </div>
-        <div class="center">Time</div>
-        <div class="right">
-          <!--  MONA ! you can change where the button lives on the page, and which page it goes to here -->
-          <ons-toolbar-button ng-click="homeNavigator.pushPage('alarm.html', { animation : 'slide' } )"> Next </ons-toolbar-button>
-        </div>
-      </ons-toolbar>
-
-      <p style="text-align:center;margin-left:auto;margin-right:auto;">Choose A Time</p>
-    </ons-page>
-  </ons-template>
-
-      <!-- <ons-row style="margin-top: 100px; text-align: center;">
+            <p style="text-align:center;margin-left:auto;margin-right:auto;">Choose A Category</p>
+            <ons-row style="margin-top: 50px; text-align: center;">
                 <ons-col>
-     <style>
-
-  .full button span {
-    background-color: limegreen;
-    border-radius: 32px;
-    color: black;
-  }
-  .partially button span {
-    background-color: orange;
-    border-radius: 32px;
-    color: black;
-  }
-</style>
-<div ng-controller="DatepickerDemoCtrl">
-    <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
-
-    <h4>Inline</h4>
-    <div style="display:inline-block; min-height:290px;">
-      <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></datepicker>
-    </div>
-
-    <h4>Popup</h4>
-    <div class="row">
-        <div class="col-md-6">
-            <p class="input-group">
-              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-            </p>
-        </div>
-
-        <div class="col-md-6">
-            <p class="input-group">
-              <input type="date" class="form-control" datepicker-popup ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <label>Format:</label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>
-        </div>
-    </div>
-
-    <hr />
-    <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
-    <button type="button" class="btn btn-sm btn-default" ng-click="dt = '2009-08-24'">2009-08-24</button>
-    <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
-    <button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" tooltip="After today restriction">Min date</button>
-</div>
-
+                    <ons-icon style="color:#40b3d5; display:block; margin-left:20px;" ng-click="setCurrentCategory('work')" icon="ion-ios-briefcase" size="28px" fixed-width="false"></ons-icon>
                 </ons-col>
             </ons-row>
-            <ons-row style="margin-top: 110px; margin-left:120px; text-align: center;">
--->
+            <ons-row style="margin-top: -25px; margin-left:70px; text-align: center;">
+                <ons-col>
+                    <ons-icon Style="color:#40b3d5;" ng-click="setCurrentCategory('leisure')" icon="ion-beer" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>
+            <ons-row style="margin-top: -25px; margin-left:-70px; text-align: center;">
+                <ons-col>
+                    <ons-icon Style="color:#40b3d5;" ng-click="setCurrentCategory('shop')"icon="ion-ios-cart" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>
+            <ons-row style="margin-top: 30px; margin-left:-70px; text-align: center;">
+                <ons-col>
+                    <ons-icon Style="color:#40b3d5;" ng-click="setCurrentCategory('call')" icon="ion-ios-telephone" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>
+            <ons-row style="margin-top: -25px; text-align: center;">
+                <ons-col>
+                    <ons-icon style="color:#40b3d5; display:block; margin-left:20px;" ng-click="setCurrentCategory('meeting')" icon="ion-ios-people" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>
+            <ons-row style="margin-top: -30px; margin-left:60px; text-align: center;">
+                <ons-col>
+                    <ons-icon Style="color:#40b3d5;" ng-click="setCurrentCategory('travel')" icon="ion-plane" size="28px" fixed-width="false"></ons-icon>
+                </ons-col>
+            </ons-row>
 
+            <p style="text-align:center;margin-left:auto;margin-right:auto; margin-top:60px;">Choose A Time</p>
+            <div>
+                <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+
+                <div style="display:inline-block; min-height:290px;margin-left:40px;">
+                  <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)">       </datepicker>
+                </div>
+
+
+            </div>
+
+            <p style="text-align:center;margin-left:auto;margin-right:auto;">Set the Alarm</p>
+            <ons-row style="margin-top: 100px; text-align: center;">
+                <ons-col>
+                    <ons-icon icon="ion-android-notifications" Style="color:#40b3d5; display:block; margin-left:auto; margin-right:auto;" size="70px"></ons-icon>
+                </ons-col>
+            </ons-row>
+            <ons-row style="margin-top: 100px; text-align: center;">
+                <ons-switch var="alarm" Style="display:block; margin-left:auto; margin-right:auto; margin-top:-50px;" checked></ons-switch>
+            </ons-row>
+
+            <ons-button style="width:130px; display:block; margin-right:auto; margin-left:auto; text-align:center; margin-bottom:50px;"ng-click="addReminder()">Add Reminder</ons-button>
+
+
+
+        </ons-page>
+    </ons-template>
+
+
+    <!-- SETTING PAGES -->
 
     <ons-template id="settings.html">
-      <ons-page ng-controller="SettingsController">
-        <ons-toolbar>
-          <div class="left">
-            <ons-toolbar-button ng-click="menu.toggle()">
-              <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
-            </ons-toolbar-button>
-          </div>
-          <div class="center">Settings</div>
-        </ons-toolbar>
+        <ons-page ng-controller="SettingsController">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button ng-click="menu.toggle()">
+                        <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">Settings</div>
+            </ons-toolbar>
 
 
-        <ons-row style="margin-top: 100px; text-align: center;">
-          <ons-col>
-            <ons-button modifier="light" ng-click="menu.toggleMenu()">
-              Toggle Menu
-            </ons-button>
-          </ons-col>
-        </ons-row>
+            <ons-row style="margin-top: 100px; text-align: center;">
+                <ons-col>
+                    <ons-button modifier="light" ng-click="menu.toggleMenu()">
+                        Toggle Menu
+                    </ons-button>
+                </ons-col>
+            </ons-row>
 
-      </ons-page>
+        </ons-page>
     </ons-template>
-
-
-    <ons-template id="alarm.html">
-      <ons-toolbar>
-        <div class="left">
-          <ons-back-button>Back</ons-back-button>
-        </div>
-        <div class="center">Alarm</div>
-        <div class="right">
-
-          <ons-toolbar-button ng-click="homeNavigator.pushPage('home.html', { animation : 'slide' } )"> Next </ons-toolbar-button>
-        </div>
-      </ons-toolbar>
-
-      <ons-row style="margin-top: 100px; text-align: center;">
-        <ons-col>
-          <ons-icon icon="ion-android-notifications" size="28px" fixed-width="false"></ons-icon>
-        </ons-col>
-
-        <p style="position:absolute; top:200px; right:100px;">Yes</p>
-      </ons-row>
-      <p style="position:absolute; top:200px; left:100px;">No</p>
-      </ons-row>
-
-      </ons-page>
-    </ons-template>
-
 
     <ons-template id="help.html">
-      <ons-page ng-controller="HelpController">
+        <ons-page ng-controller="HelpController">
 
-        <ons-toolbar>
-          <div class="left">
-            <ons-toolbar-button ng-click="menu.toggle()">
-              <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
-            </ons-toolbar-button>
-          </div>
-          <div class="center">Help</div>
-        </ons-toolbar>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button ng-click="menu.toggle()">
+                        <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">Help</div>
+            </ons-toolbar>
 
-        <ons-row style="margin-top: 100px; text-align: center;">
-          <ons-col>
-            <ons-button modifier="light" ng-click="menu.toggleMenu()">
-              Toggle Menu
-            </ons-button>
-          </ons-col>
-        </ons-row>
 
-      </ons-page>
+            <ons-row style="margin-top: 100px; text-align: center;">
+                <ons-col>
+                    <ons-button modifier="light" ng-click="menu.toggleMenu()">
+                        Toggle Menu
+                    </ons-button>
+                </ons-col>
+            </ons-row>
+
+        </ons-page>
     </ons-template>
 
 </body>
-
 </html>
