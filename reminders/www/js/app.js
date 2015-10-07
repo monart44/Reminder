@@ -10,6 +10,12 @@
           $scope.home-nav.pushPage('new.html');
         }
 
+        ParseService.getReminders(function(results) {
+          $scope.$apply(function() {
+            $scope.items = results;
+          });
+        });
+
     });
 
 

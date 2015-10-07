@@ -124,7 +124,7 @@
             <ons-toolbar modifier="transparent"></ons-toolbar>
 
             <ons-list class="menu-list">
-                                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('home.html', {closeMenu: true})">
+                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('home.html', {closeMenu: true})">
                     Home
                 </ons-list-item>
 
@@ -157,6 +157,26 @@
                     </ons-toolbar-button>
                 </div>
             </ons-toolbar>
+
+            <ons-list>
+             <ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showDetail($index)">
+                <ons-row>
+                  <ons-col width="10">
+                    <div class="item-thum">
+                      <!-- <img ng-src="{{ item.get('thumbnail').url() }}"> -->
+                    </div>
+                  </ons-col>
+                  <ons-col style="text-align:center;margin-left:auto;margin-right:auto;">
+                  <header>
+                     <span class="">Title: {{ item.get('title') }}</span>
+                  </header>
+                   <p class="">Category: {{ item.get('category') }}</p>
+                   <p class="">Time: {{ item.get('time') }}</p>
+                   <p class="">Alarm? {{ item.get('alarm') }}</p>
+                  </ons-col>
+                </ons-row>
+             </ons-list-item>
+         </ons-list>
 
 
         </ons-page>
