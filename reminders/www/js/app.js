@@ -1,38 +1,42 @@
 (function(){
   'use strict';
   var module = angular.module('app', ['onsen']);
-    
-    
+
+
     module.controller('HomeController', function($scope, $data) {
-    
+
         $scope.newReminder = function() {
           console.log('new reminder!');
           $scope.home-nav.pushPage('new.html');
         }
-    
+
     });
 
-    module.controller('CategoryController', function($scope, $data) {
-        console.log($scope.reminder_title);
-        
+    module.controller('TaskController', function($scope, $rootScope, $data) {
+
+        $rootScope.reminder_title = {};
+
         $scope.nav = function() {
-            $scope.$apply();
+          console.log($scope.reminder_title);
+          $rootScope.reminder_title = reminder_title;
+          $scope.$apply();
+          homeNavigator.pushPage('category.html', { animation : 'slide' } )
+        }
+
+    });
+
+    module.controller('CategoryController', function($scope, $rootScope, $data) {
+        var init = function() {
+          console.log($rootScope.reminder_title);
+        };
+        init();
+
+        $scope.nav = function() {
             homeNavigator.pushPage('time.html', { animation : 'slide' } );
         }
 
     });
-    
-    module.controller('TaskController', function($scope, $data) {
-        
-        $scope.nav = function() {
-            $scope.$apply();
-            homeNavigator.pushPage('category.html', { animation : 'slide' } )
-        }
-        
-        $scope.reminder_title = {};
 
-    });
-    
     module.controller('TimeController', function($scope, $data) {
    // angular.module('ui.bootstrap.demo').controller('DatepickerDemoCtrl', function ($scope) {
  // $scope.today = function() {
@@ -102,24 +106,24 @@
 
   //  return '';
  // };
-//}); 
-    
-    });
-    
-        module.controller('SettingsController', function($scope, $data) {
-    
-    
-    });
-    
-        module.controller('HelpController', function($scope, $data) {
-    
-    
-    });
-    
-    
+//});
 
-    
-    
+    });
+
+        module.controller('SettingsController', function($scope, $data) {
+
+
+    });
+
+        module.controller('HelpController', function($scope, $data) {
+
+
+    });
+
+
+
+
+
   module.factory('$data', function() {
       var data = {};
 
